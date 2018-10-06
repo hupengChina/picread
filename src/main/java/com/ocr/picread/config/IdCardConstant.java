@@ -3,9 +3,7 @@ package com.ocr.picread.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
-@Component
 @Configuration
 @PropertySource(value = { "classpath:idcardconstant.properties"})
 @ConfigurationProperties(prefix = "idcardconstant")

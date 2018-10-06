@@ -1,6 +1,6 @@
 package com.ocr.picread.utils;
 
-import com.ocr.picread.common.EnvConstant;
+import com.ocr.picread.config.EnvConstant;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -130,7 +130,7 @@ public class OpenCVImgUtil {
 
     public static int[] detectFace(String fileName) {
         int[] rectPosition = new int[4];
-        CascadeClassifier faceDetector = new CascadeClassifier(EnvConstant.FACEDETECTIONS);
+        CascadeClassifier faceDetector = new CascadeClassifier(EnvConstant.frontalface);
         Mat image = Imgcodecs.imread(fileName);
         MatOfRect faceDetections = new MatOfRect();
         Size minSize = new Size(120, 120);

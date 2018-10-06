@@ -1,5 +1,6 @@
 package com.ocr.picread.utils;
 
+import com.ocr.picread.common.EnvConstant;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -70,86 +71,52 @@ public class OpenCVImgUtil {
      * @return
      */
     public static BufferedImage replaceWithWhiteColor(BufferedImage bi) {
-
         int[] rgb = new int[3];
-
         int width = bi.getWidth();
-
         int height = bi.getHeight();
-
         int minx = bi.getMinX();
-
         int miny = bi.getMinY();
-
         /**
          *
          * 遍历图片的像素，为处理图片上的杂色，所以要把指定像素上的颜色换成目标白色 用二层循环遍历长和宽上的每个像素
          *
          */
-
-        int hitCount = 0;
-
         for (int i = minx; i < width - 1; i++) {
-
             for (int j = miny; j < height; j++) {
-
                 /**
                  *
                  * 得到指定像素（i,j)上的RGB值，
                  *
                  */
-
                 int pixel = bi.getRGB(i, j);
-
                 int pixelNext = bi.getRGB(i + 1, j);
-
                 /**
                  *
                  * 分别进行位操作得到 r g b上的值
                  *
                  */
-
                 rgb[0] = (pixel & 0xff0000) >> 16;
-
                 rgb[1] = (pixel & 0xff00) >> 8;
-
                 rgb[2] = (pixel & 0xff);
-
                 /**
                  *
                  * 进行换色操作，我这里是要换成白底，那么就判断图片中rgb值是否在范围内的像素
                  *
                  */
                 if (
-
                         (((rgb[0] >= 18) && (rgb[0] <= 100)) || (rgb[0] <= 73))) {
-
                     // 进行换色操作,0xffffff是白色
-
                     bi.setRGB(i, j, 0x000000);
-
                 }
-
                 // 经过不断尝试，RGB数值相互间相差15以内的都基本上是灰色，
-
                 // 对以身份证来说特别是介于73到78之间，还有大于100的部分RGB值都是干扰色，将它们一次性转变成白色
-
-                if (
-
-                        (((rgb[0] > 73) && (rgb[0] < 78)) || (rgb[0] > 100))) {
-
+                if ((((rgb[0] > 73) && (rgb[0] < 78)) || (rgb[0] > 100))) {
                     // 进行换色操作,0xffffff是白色
-
                     bi.setRGB(i, j, 0xffffff);
-
                 }
-
             }
-
         }
-
         return bi;
-
     }
 
     public static int[] getImageWidth(String fileName) throws FileNotFoundException, IOException {
@@ -163,7 +130,7 @@ public class OpenCVImgUtil {
 
     public static int[] detectFace(String fileName) {
         int[] rectPosition = new int[4];
-        CascadeClassifier faceDetector = new CascadeClassifier("F:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml");
+        CascadeClassifier faceDetector = new CascadeClassifier(EnvConstant.FACEDETECTIONS);
         Mat image = Imgcodecs.imread(fileName);
         MatOfRect faceDetections = new MatOfRect();
         Size minSize = new Size(120, 120);

@@ -31,7 +31,7 @@ public class IdcardBlackServiceImpl implements IdcardService {
         //同理操作身份证号码
         IDCardReadHelper.cutCardNoImg(imgInfo, cardFile, cardNoFile);
         OpenCVImgUtil.convertBackWhiteImage(cardNoFile,cardNoDealFile);
-        idCardManageInfo.setCardNo(TesseractORC.doOCR(nameDealFile, TesseractLanguage.ENG));
+        idCardManageInfo.setCardNo(TesseractORC.doOCR(cardNoDealFile, TesseractLanguage.ENM));
         return idCardManageInfo;
     }
 }

@@ -2,6 +2,8 @@ package com.ocr.picread.entity;
 
 public class IdCardManageInfo extends IdCardInfo {
 
+    private int type;
+
     //身份证图片url
     private String cardUrl;
 
@@ -19,6 +21,14 @@ public class IdCardManageInfo extends IdCardInfo {
 
     //身份证处理图位置
     private String cardNoDealFile;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getCardUrl() {
         return cardUrl;

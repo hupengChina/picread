@@ -104,20 +104,4 @@ public class DeleteFileUtil {
             return false;
         }
     }
-
-    public static void main(String[] args) {
-//  // 删除单个文件
-//  String file = "c:/test/test.txt";
-//  DeleteFileUtil.deleteFile(file);
-//  logger.info();
-        // 删除一个目录
-        String dir = "D:/home/web/upload/upload/files";
-        DeleteFileUtil.deleteDirectory(dir);
-//  logger.info();
-//  // 删除文件
-//  dir = "c:/test/test0";
-//  DeleteFileUtil.delete(dir);
-
-    }
-
 }

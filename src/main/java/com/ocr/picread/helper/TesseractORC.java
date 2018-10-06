@@ -1,5 +1,6 @@
 package com.ocr.picread.helper;
 
+import com.ocr.picread.common.EnvConstant;
 import net.sourceforge.tess4j.Tesseract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class TesseractORC {
      * @param language 训练库语言
      * @return 识别结果
      */
-    public static String doOCR(String srImage, String language) {
+    public static synchronized  String doOCR(String srImage, String language) {
         try {
             File imageFile = new File(srImage);
             if (!imageFile.exists()) {
@@ -28,10 +29,12 @@ public class TesseractORC {
                 return "图片不存在";
             }
             BufferedImage textImage = ImageIO.read(imageFile);
-            Tesseract instance=Tesseract.getInstance();
-            instance.setDatapath("C:\\Program Files (x86)\\Tesseract-OCR\\tessdata");//设置训练库
+            //Tesseract instance=Tesseract.getInstance();//单例并发报错
+            Tesseract instance= new Tesseract();
+            instance.setDatapath(EnvConstant.TESSDATA);//设置训练库
             instance.setLanguage(language);
-            String result = instance.doOCR(textImage);
+            instance.setPageSegMode(7);//单行识别
+            String result = instance.doOCR(textImage).replaceAll("\r|\n|\t|[\\p{Punct}\\pP]", "");
             return result;
         } catch (Exception e) {
             e.printStackTrace();

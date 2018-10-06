@@ -25,7 +25,7 @@ public class IdCardServiceImpl implements IdcardService {
         idCardManageInfo.setName(TesseractORC.doOCR(nameFile, TesseractLanguage.CHI));
         //同理操作身份证号码
         IDCardReadHelper.cutCardNoImg(imgInfo, cardFile, cardNoFile);
-        idCardManageInfo.setCardNo(TesseractORC.doOCR(cardNoFile, TesseractLanguage.ENG));
+        idCardManageInfo.setCardNo(TesseractORC.doOCR(cardNoFile, TesseractLanguage.ENM));
         return idCardManageInfo;
     }
 }

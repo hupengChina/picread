@@ -12,6 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "envconstant")
 public class EnvConstant {
 
+    public static String opencv;
+
     public static String tessdata;
 
     public static String frontalface;
@@ -20,6 +22,14 @@ public class EnvConstant {
 
     public String getTessdata() {
         return tessdata;
+    }
+
+    public String getOpencv() {
+        return opencv;
+    }
+
+    public void setOpencv(String opencv) {
+        this.opencv = opencv;
     }
 
     public void setTessdata(String tessdata) {

@@ -3,6 +3,7 @@ package com.ocr.picread.helper;
 import com.ocr.picread.controller.IDCardController;
 import com.ocr.picread.entity.ImgInfo;
 import com.ocr.picread.utils.OpenCVImgUtil;
+import org.opencv.core.Core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,8 @@ public class IDCardReadHelper {
     private static final Double avatarSpacePer = 0.16;
 
     public static ImgInfo loadImg(ImgInfo imgInfo, String cardFile) {
-        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        System.load("D:\\ImgRead\\opencv\\build\\java\\x64\\opencv_java320.dll");
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        //System.load(EnvConstant.opencv);
         int[] rectPosition = OpenCVImgUtil.detectFace(cardFile);
         imgInfo.setX(rectPosition[0]);
         imgInfo.setY(rectPosition[1]);

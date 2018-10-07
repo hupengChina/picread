@@ -1,9 +1,11 @@
 package com.ocr.picread.entity;
 
+import java.io.Serializable;
+
 /**
  * 身份证信息
  */
-public class IdCardInfo {
+public class IdCardInfo implements Serializable{
 
     //姓名
     private String name;
